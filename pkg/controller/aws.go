@@ -17,6 +17,7 @@ limitations under the License.
 package controller
 
 import (
+	"github.com/crossplane-contrib/provider-aws/pkg/controller/ec2/vpcpeerconnectionaccepter"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/crossplane/crossplane-runtime/pkg/controller"
@@ -285,6 +286,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		resolverendpoint.SetupResolverEndpoint,
 		resolverrule.SetupResolverRule,
 		vpcpeeringconnection.SetupVPCPeeringConnection,
+		vpcpeerconnectionaccepter.SetupVPCPeerConnectionAccepter,
 		vpcendpoint.SetupVPCEndpoint,
 		kafkacluster.SetupCluster,
 		efsmounttarget.SetupMountTarget,
