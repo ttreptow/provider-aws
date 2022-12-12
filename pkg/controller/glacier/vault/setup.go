@@ -121,10 +121,10 @@ func (u *updateClient) updateAccessPolicy(ctx context.Context, vault *svcapitype
 			VaultName: vaultName,
 			AccountId: vault.Spec.ForProvider.AccountID,
 		})
-		if err != nil {
+		if err != nil && !IsNotFound(err) {
 			return err
 		}
-		if policyResp.Policy != nil {
+		if policyResp != nil && policyResp.Policy != nil {
 			_, err = u.client.DeleteVaultAccessPolicyWithContext(ctx, &svcsdk.DeleteVaultAccessPolicyInput{
 				VaultName: vaultName,
 				AccountId: vault.Spec.ForProvider.AccountID,
@@ -192,15 +192,17 @@ func (u *updateClient) updateTags(ctx context.Context, vault *svcapitypes.Vault,
 			deleteKeys = append(deleteKeys, aws.String(k))
 		}
 	}
-	_, err = u.client.RemoveTagsFromVaultWithContext(ctx, &svcsdk.RemoveTagsFromVaultInput{
-		VaultName: vaultName,
-		AccountId: vault.Spec.ForProvider.AccountID,
-		TagKeys:   deleteKeys,
-	})
-	if err != nil {
-		return err
+	if len(deleteKeys) > 0 {
+		_, err = u.client.RemoveTagsFromVaultWithContext(ctx, &svcsdk.RemoveTagsFromVaultInput{
+			VaultName: vaultName,
+			AccountId: vault.Spec.ForProvider.AccountID,
+			TagKeys:   deleteKeys,
+		})
+		if err != nil {
+			return err
+		}
 	}
-	return err
+	return nil
 }
 
 func getAWSTags(vault *svcapitypes.Vault) map[string]*string {
