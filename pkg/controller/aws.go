@@ -120,6 +120,7 @@ import (
 	"github.com/crossplane-contrib/provider-aws/pkg/controller/elbv2/targetgroup"
 	emrcontainersjobrun "github.com/crossplane-contrib/provider-aws/pkg/controller/emrcontainers/jobrun"
 	emrcontainersvirtualcluster "github.com/crossplane-contrib/provider-aws/pkg/controller/emrcontainers/virtualcluster"
+	glaciervault "github.com/crossplane-contrib/provider-aws/pkg/controller/glacier/vault"
 	glueclassifier "github.com/crossplane-contrib/provider-aws/pkg/controller/glue/classifier"
 	glueconnection "github.com/crossplane-contrib/provider-aws/pkg/controller/glue/connection"
 	gluecrawler "github.com/crossplane-contrib/provider-aws/pkg/controller/glue/crawler"
@@ -348,6 +349,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		batchjob.SetupJob,
 		emrcontainersjobrun.SetupJobRun,
 		emrcontainersvirtualcluster.SetupVirtualCluster,
+		glaciervault.SetupVault,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
