@@ -18,6 +18,7 @@ limitations under the License.
 package apis
 
 import (
+	glacierv1alpha1 "github.com/crossplane-contrib/provider-aws/apis/glacier/v1alpha1"
 	"k8s.io/apimachinery/pkg/runtime"
 
 	acmv1alpha1 "github.com/crossplane-contrib/provider-aws/apis/acm/v1alpha1"
@@ -163,6 +164,7 @@ func init() {
 		opensearchv1alpha1.AddToScheme,
 		batchv1alpha1.AddToScheme,
 		batchmanualv1alpha1.SchemeBuilder.AddToScheme,
+		glacierv1alpha1.SchemeBuilder.AddToScheme,
 	)
 }
 

@@ -118,6 +118,7 @@ import (
 	"github.com/crossplane-contrib/provider-aws/pkg/controller/elbv2/loadbalancer"
 	"github.com/crossplane-contrib/provider-aws/pkg/controller/elbv2/target"
 	"github.com/crossplane-contrib/provider-aws/pkg/controller/elbv2/targetgroup"
+	glaciervault "github.com/crossplane-contrib/provider-aws/pkg/controller/glacier/vault"
 	glueclassifier "github.com/crossplane-contrib/provider-aws/pkg/controller/glue/classifier"
 	glueconnection "github.com/crossplane-contrib/provider-aws/pkg/controller/glue/connection"
 	gluecrawler "github.com/crossplane-contrib/provider-aws/pkg/controller/glue/crawler"
@@ -344,6 +345,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		jobqueue.SetupJobQueue,
 		jobdefinition.SetupJobDefinition,
 		batchjob.SetupJob,
+		glaciervault.SetupVault,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

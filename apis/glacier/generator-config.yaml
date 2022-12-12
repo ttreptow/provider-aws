@@ -1,0 +1,5 @@
+ignore:
+  field_paths:
+    - DescribeVaultInput.VaultName
+    - CreateVaultInput.VaultName
+    - DeleteVaultInput.VaultName
